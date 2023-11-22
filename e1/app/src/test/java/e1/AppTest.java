@@ -96,5 +96,19 @@ public class AppTest {
 		// la sottosequenza viene data in uscita
 		assertEquals(List.of(List.of(10,50,70), List.of(80,20), List.of(30,30,39,30), List.of(40)), 
 			sc.combine(List.of(10,50,70,80,20,30,30,39,30,40)));
-	}		
+	}
+	
+}
+
+class App{
+	public static void main(String[] args) {
+		SubsequenceCombiner<Integer,Integer> sc = new SubsequenceCombinerFactoryImpl().tripletsToSum();
+		// Si isolano triple, e se ne fornisce la somma: una parte finale di 1 o 2 elementi è comunque sommata
+		assertEquals(List.of(30,300,3000,30),
+			sc.combine(List.of(10, 10, 10, 100, 100, 100, 1000, 1000, 1000, 10, 20))
+		);
+		assertEquals(List.of(18,300),
+			sc.combine(List.of(5, 6, 7, 100, 100, 100))
+		);
+	}
 }
